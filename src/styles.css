@@ -1,0 +1,13 @@
+table {
+    border: 1px solid;
+    margin-bottom: 2rem;
+}
+
+th,
+td {
+    border: 1px solid;
+}
+
+caption {
+  font-weight: 700;
+}
