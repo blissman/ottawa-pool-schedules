@@ -1,13 +1,3 @@
-const indexes = [
-    "https://ottawa.ca/en/recreation-and-parks/recreation-facilities/place-listing?place_facets%5B0%5D=place_type%3A4285&text=&page=0",
-    "https://ottawa.ca/en/recreation-and-parks/recreation-facilities/place-listing?place_facets%5B0%5D=place_type%3A4285&text=&page=1"
-]
-
-const array = Array.from(document.getElementsByClassName("views-field-title"));
-array.forEach((element) => {
-    console.log(element.childNodes[0].href);
-});
-
 const pools = [
     "https://ottawa.ca/en/recreation-and-parks/recreation-facilities/facility-listing/aquaview-community-hall",
     "https://ottawa.ca/en/recreation-and-parks/recreation-facilities/facility-listing/bearbrook-outdoor-pool",
@@ -42,19 +32,30 @@ const pools = [
     "https://ottawa.ca/en/recreation-and-parks/recreation-facilities/facility-listing/walter-baker-sports-centre"
 ];
 
-let butts;
-fetch("https://ottawa.ca/en/recreation-and-parks/recreation-facilities/facility-listing/aquaview-community-hall")
-  .then((response) => response.text())
-  .then((data) => butts = data)
-
 const parser = new DOMParser();
-parser.parseFromString(butts, "text/html");
+const pages = [];
+const tables = [];
 
-const buttons = Array.from(document.getElementsByTagName("button"));
-buttons.forEach((button) => {
-    const expected = /Drop-in schedule - swim and aquafit/g;
-    if (button.textContent.match(expected)) {
-        const grandParent = button.parentElement.parentElement;
-        const table = grandParent.getElementsByTagName('table');
-    }
+pools.forEach((uri) => {
+    fetch(uri)
+        .then((response) => response.text())
+        .then((data) => parser.parseFromString(data, "text/html"))
+        .then((output) => pages.push(output))
 });
+
+const parsePages = () => {
+    pages.forEach((page) => {
+    const buttons = Array.from(page.getElementsByTagName("button"));
+    buttons.forEach((button) => {
+        const expected = /Drop-in schedule - swim and aquafit/g;
+        if (button.textContent.match(expected)) {
+            const grandParent = button.parentElement.parentElement;
+            try {
+                tables.push(grandParent.getElementsByTagName('table')[0].cloneNode(true));
+            } catch (error) {
+                console.warn(error);
+            }
+        }
+    });
+});
+};

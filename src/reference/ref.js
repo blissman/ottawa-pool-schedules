@@ -4,7 +4,6 @@ const indexes = [
 ]
 
 const array = Array.from(document.getElementsByClassName("views-field-title"));
-
 array.forEach((element) => {
     console.log(element.childNodes[0].href);
 });
