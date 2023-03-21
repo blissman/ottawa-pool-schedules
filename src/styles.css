@@ -1,6 +1,7 @@
 table {
     border: 1px solid;
     margin-bottom: 2rem;
+    min-width: 100%;
 }
 
 th,
@@ -10,4 +11,8 @@ td {
 
 caption {
   font-weight: 700;
+}
+
+body{
+    font-family: helvetica;
 }
