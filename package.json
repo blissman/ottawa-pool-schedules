@@ -1,0 +1,45 @@
+{
+    "name": "pool-reader",
+    "version": "1.0.0",
+    "description": "scraping and aggregating pool schedules",
+    "main": "index.js",
+    "scripts": {
+        "test": "jest"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/blissman/pool-reader.git"
+    },
+    "keywords": [
+        "scraping",
+        "pools"
+    ],
+    "author": "Bliss Man",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/blissman/pool-reader/issues"
+    },
+    "homepage": "https://github.com/blissman/pool-reader#readme",
+    "devDependencies": {
+        "@babel/core": "^7.14.3",
+        "@babel/preset-env": "^7.14.4",
+        "@babel/register": "^7.13.16",
+        "del": "^6.0.0",
+        "gulp": "^4.0.2",
+        "gulp-babel": "^8.0.0",
+        "gulp-clean-css": "^4.3.0",
+        "gulp-eslint": "^6.0.0",
+        "gulp-htmlmin": "^5.0.1",
+        "gulp-imagemin": "^7.1.0",
+        "gulp-jsbeautifier": "^3.0.1",
+        "gulp-uglify": "^3.0.2",
+        "gulp-uglify-es": "^2.0.0",
+        "jest": "^27.0.4"
+    },
+    "jest": {
+        "collectCoverage": true,
+        "coverageDirectory": "./test/coverage",
+        "testEnvironment": "jsdom",
+        "testRunner": "jest-jasmine2"
+    }
+}
