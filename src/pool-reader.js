@@ -171,4 +171,4 @@ const parsePages = () => {
 window.setTimeout(() => {
     parsePages();
     appendSchedules(tables);
-}, 1000);
+}, 1500);
