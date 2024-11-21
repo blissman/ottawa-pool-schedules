@@ -137,14 +137,17 @@ const appendSchedules = (elements) => {
 
 const poolKeys = Object.keys(pools);
 
-poolKeys.forEach((pool) => {
-    fetch(pools[pool].href)
-        .then((response) => response.text())
-        .then((data) => parser.parseFromString(data, "text/html"))
-        .then((output) => pools[pool]['page'] = output);
-})
+async function fetchPools() {
+    await Promise.all(poolKeys.map(async (pool) => {
+        await fetch(pools[pool].href)
+            .then((response) => response.text())
+            .then((data) => parser.parseFromString(data, "text/html"))
+            .then((output) => pools[pool]['page'] = output);
+    }));
+};
 
-const parsePages = () => {
+
+async function parsePages () {
     for (pool in pools) {
         const page = pools[pool]['page'];
         const buttons = Array.from(page.getElementsByTagName("button"));
@@ -165,10 +168,8 @@ const parsePages = () => {
                 }
             }
         });
+        appendSchedules(tables);
     }
 };
 
-window.setTimeout(() => {
-    parsePages();
-    appendSchedules(tables);
-}, 1500);
+fetchPools().then(parsePages);
