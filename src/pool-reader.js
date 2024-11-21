@@ -147,7 +147,7 @@ async function fetchPools() {
 };
 
 
-async function parsePages() {
+function parsePages() {
     for (pool in pools) {
         const page = pools[pool]['page'];
         const buttons = Array.from(page.getElementsByTagName("button"));
